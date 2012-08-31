@@ -77,10 +77,24 @@ class SimplePie_Misc
 		return $time;
 	}
 
+    /**
+     * Get an absolute URL from a relative URL and base URL.
+     *
+     * @param string $relative Relative portion of the URL.
+     * @param string $base Base portion of the URL.
+     * @return string|false
+     */
 	public static function absolutize_url($relative, $base)
 	{
 		$iri = SimplePie_IRI::absolutize(new SimplePie_IRI($base), $relative);
-		return $iri->get_uri();
+		if ($iri instanceof SimplePie_IRI)
+		{
+			return $iri->get_uri();
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**

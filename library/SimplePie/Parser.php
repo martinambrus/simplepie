@@ -278,8 +278,11 @@ class SimplePie_Parser
 
 		if (isset($attribs[SIMPLEPIE_NAMESPACE_XML]['base']))
 		{
-			$this->xml_base[] = $this->registry->call('Misc', 'absolutize_url', array($attribs[SIMPLEPIE_NAMESPACE_XML]['base'], end($this->xml_base)));
-			$this->xml_base_explicit[] = true;
+			$absoluteBase = $this->registry->call('Misc', 'absolutize_url', array($attribs[SIMPLEPIE_NAMESPACE_XML]['base'], end($this->xml_base)));
+			if ($absoluteBase) {
+				$this->xml_base[] = $absoluteBase;
+				$this->xml_base_explicit[] = true;
+			}
 		}
 		else
 		{

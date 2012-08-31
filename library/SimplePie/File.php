@@ -140,7 +140,16 @@ class SimplePie_File
 						{
 							$this->redirects++;
 							$location = SimplePie_Misc::absolutize_url($this->headers['location'], $url);
-							return $this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
+							if ($location)
+							{
+								return $this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
+							}
+							else
+							{
+								$this->error = 'Unable to absolutize URL';
+								$this->success = false;
+								return;
+							}
 						}
 					}
 				}
@@ -222,7 +231,16 @@ class SimplePie_File
 							{
 								$this->redirects++;
 								$location = SimplePie_Misc::absolutize_url($this->headers['location'], $url);
-								return $this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
+								if ($location)
+								{
+									return $this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
+								}
+								else
+								{
+									$this->error = 'Unable to absolutize URL';
+									$this->success = false;
+									return;
+								}
 							}
 							if (isset($this->headers['content-encoding']))
 							{
