@@ -114,6 +114,8 @@ class SimplePie_Parser
 			$data = substr($data, 3);
 		}
 
+		$data = trim($data);
+
 		if (substr($data, 0, 5) === '<?xml' && strspn(substr($data, 5, 1), "\x09\x0A\x0D\x20") && ($pos = strpos($data, '?>')) !== false)
 		{
 			$declaration = $this->registry->create('XML_Declaration_Parser', array(substr($data, 5, $pos - 5)));
