@@ -147,9 +147,16 @@ class SimplePie_File
 						{
 							$this->redirects++;
 							$location = SimplePie_Misc::absolutize_url($this->headers['location'], $url);
-							$previousStatusCode = $this->status_code;
-							$this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
-							$this->permanent_url = ($previousStatusCode == 301) ? $location : $url;
+              if ($location) {
+                $previousStatusCode = $this->status_code;
+                $this->__construct( $location, $timeout, $redirects, $headers, $useragent, $force_fsockopen );
+                $this->permanent_url = ( $previousStatusCode == 301 ) ? $location : $url;
+              }
+              else
+              {
+                $this->error = 'Unable to absolutize URL';
+                $this->success = false;
+              }
 							return;
 						}
 					}
@@ -232,9 +239,16 @@ class SimplePie_File
 							{
 								$this->redirects++;
 								$location = SimplePie_Misc::absolutize_url($this->headers['location'], $url);
-								$previousStatusCode = $this->status_code;
-								$this->__construct($location, $timeout, $redirects, $headers, $useragent, $force_fsockopen);
-								$this->permanent_url = ($previousStatusCode == 301) ? $location : $url;
+                if ($location) {
+                  $previousStatusCode = $this->status_code;
+                  $this->__construct( $location, $timeout, $redirects, $headers, $useragent, $force_fsockopen );
+                  $this->permanent_url = ( $previousStatusCode == 301 ) ? $location : $url;
+                }
+                else
+                {
+                  $this->error = 'Unable to absolutize URL';
+                  $this->success = false;
+                }
 								return;
 							}
 							if (isset($this->headers['content-encoding']))

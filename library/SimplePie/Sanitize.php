@@ -392,7 +392,7 @@ class SimplePie_Sanitize
 				$data = htmlspecialchars($data, ENT_COMPAT, 'UTF-8');
 			}
 
-			if ($this->output_encoding !== 'UTF-8')
+			if ($data && $this->output_encoding !== 'UTF-8')
 			{
 				$data = $this->registry->call('Misc', 'change_encoding', array($data, 'UTF-8', $this->output_encoding));
 			}

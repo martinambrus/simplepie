@@ -292,6 +292,11 @@ class SimplePie_Locator
 						continue;
 					}
 
+					if (!$href)
+					{
+						continue;
+					}
+
 					$current = $this->registry->call('Misc', 'parse_url', array($this->file->url));
 
 					if ($parsed['authority'] === '' || $parsed['authority'] === $current['authority'])
